@@ -1,0 +1,22 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: talk-form
+  main:
+    allow-bean-definition-overriding: true
+server:
+  port: 8088
+
+pagehelper:
+  auto-dialect: true
+  close-conn: true
+mybatis:
+  type-aliases-package: com.open.bright.form.mapper
+  mapper-locations: classpath:mapper/*/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+mapper:
+  not-empty: false
+  identity: mysql

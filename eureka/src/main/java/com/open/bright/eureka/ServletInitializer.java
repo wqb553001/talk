@@ -1,4 +1,4 @@
-package com.open.bright.gateway;
+package com.open.bright.eureka;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -7,7 +7,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(GatewayApplication.class);
+		return application.sources(EurekaApplication.class);
 	}
 
 }

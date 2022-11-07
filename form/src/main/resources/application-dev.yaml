@@ -1,0 +1,73 @@
+spring:
+  cloud:
+    discovery:
+      enabled: true
+      client:
+        health-indicator:
+          enabled: true
+  datasource:
+    #erpdb: # &dataconfig
+    url: jdbc:mysql://127.0.0.1:3306/erpdb?zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&autoReconnectForPools=true&useSSL=false&serverTimezone=GMT%2b8
+    username: erp_wr
+    password: w19R8EroDvaN8OIr
+    driverClassName: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initialSize: 20
+      minIdle: 20
+      maxActive: 100
+      # 配置获取连接等待超时的时间
+      maxWait: 10000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 5000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      #       removeAbandonedTimeout: 60
+      removeAbandoned: false
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      #       testOnBorrow: true
+      testOnReturn: false
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 50
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filters: stat  #,wall,log4j
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=300;druid.stat.logSlowSql=true
+      # 合并多个DruidDataSource的监控数据
+      #useGlobalDataSourceStat=true
+      query-timeout-second: 4
+
+
+eureka:
+  client:
+    registryFetchIntervalSeconds: 5
+    leaseRenewalIntervalInSeconds: 5
+    serviceUrl:
+      defaultZone: http://localhost:8080/eureka/
+    enabled: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    ip-address: 127.0.0.1
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
+talk:
+  discover:
+    server:
+      settings:
+        talk-form: http://localhost:8080/eureka/
+#ucenter-v1:
+#  ribbon:
+#    NIWSServerListFilterClassName: cn.huimin100.erp.commons.discovery.HmServerListFilter
+
+swagger:
+  enable: true
+hystrix.command.default.execution.timeout.enabled: false
+logging:
+  level:
+    cn.huimin100.erp.settlement.repository.settlement.mapper: debug
+
