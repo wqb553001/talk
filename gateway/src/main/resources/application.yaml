@@ -1,0 +1,49 @@
+
+server:
+  port: 8004
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: talk-gateway
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    gateway:
+      # 配置路由
+      routes:
+        - id: talk-form
+          uri: lb://talk-form/
+          predicates:
+            - Path=/talk/form/**
+          filters:
+            - PrefixPath=/talk-form   # 自动添加前缀
+        - id: talk-fegn
+          uri: lb://talk_feign/
+          predicates:
+            - Path=/talk/feign/**
+      globalcors:
+        cors-configurations:
+          '[/**]': # 允许访问的资源
+            allowedOrigins: "*" #跨域允许来源
+            allowedMethods:
+              - GET
+              - POST
+    sentinel: #启动参数 VM options : -Dserver.port=8008
+      transport:
+        dashboard: localhost:8008   # 管理平台 访问路径
+        port: 8719                  # sentinel.api.port=8719
+
+eureka:
+  client:
+    registryFetchIntervalSeconds: 5
+    leaseRenewalIntervalInSeconds: 5
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8080/eureka/
+    enabled: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    ip-address: 127.0.0.1

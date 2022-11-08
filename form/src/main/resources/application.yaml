@@ -5,8 +5,13 @@ spring:
     name: talk-form
   main:
     allow-bean-definition-overriding: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 server:
   port: 8088
+  servlet:
+    context-path: /talk-form
 
 pagehelper:
   auto-dialect: true

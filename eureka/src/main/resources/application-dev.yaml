@@ -1,0 +1,37 @@
+server:
+  # 去警告：Eureka的默认阈值为：85% ；
+  # Eureka可能会声明已经不存在的实例。刷新数小于阈值时，为了安全起见不会剔除过期实例。
+  enable-self-preservation: false
+
+eureka:
+  client:
+    registryFetchIntervalSeconds: 5
+    leaseRenewalIntervalInSeconds: 5
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8080/eureka/
+    enabled: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    ip-address: 127.0.0.1
+
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
+talk:
+  discover:
+    server:
+      settings:
+        talk-form: http://localhost:8080/eureka/
+#ucenter-v1:
+#  ribbon:
+#    NIWSServerListFilterClassName: cn.huimin100.erp.commons.discovery.HmServerListFilter
+
+swagger:
+  enable: true
+hystrix.command.default.execution.timeout.enabled: false
+logging:
+  level:
+    cn.huimin100.erp.settlement.repository.settlement.mapper: debug
+

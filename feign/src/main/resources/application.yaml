@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: talk-feign
+  main:
+    allow-bean-definition-overriding: true
+server:
+  port: 8083
+
+
+eureka:
+  client:
+    registryFetchIntervalSeconds: 5
+    leaseRenewalIntervalInSeconds: 5
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8080/eureka/
+    enabled: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    ip-address: 127.0.0.1
