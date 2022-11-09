@@ -1,6 +1,6 @@
 # web_form
 
-> \"辩则明：web_form\"
+> 辩则明：web_form
 
 ## Build Setup
 
