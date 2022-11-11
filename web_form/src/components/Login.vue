@@ -17,8 +17,8 @@
 <!--          <el-input v-model.number="loginForm.age"></el-input>-->
 <!--        </el-form-item>-->
         <el-form-item>
-          <el-button type="primary" @click="submitForm('loginForm')">提交</el-button>
-          <el-button @click="resetForm('loginForm')">重置</el-button>
+          <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+          <el-button @click="resetForm('ruleForm')">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -92,6 +92,7 @@
 
       return {
         loginForm: {
+
           username: '',
           pass: '',
           checkPass: ''
@@ -119,7 +120,35 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+            // alert('submit!');
+            console.log(this.form);
+            // this.axios.post('https://rapserver.sunmi.com/app/mock/340/login', this.loginForm,{
+            // this.axios.post('http://localhost:8004/talk/form/login', this.loginForm,{
+            //   headers: {
+            //     'content-type': 'application/json'
+            //     ,
+            //     'Access-Control-Allow-Origin': '127.0.0.1:8080'
+            //     // 'Access-Control-Allow-Origin': '*'
+            //     // ,"token": '14a1347f412b39f' // token换成从缓存获取  "Access-Control-Allow-Origin"]="http://127.0.0.1:8080"
+            //   }})
+            this.axios.get('http://localhost:8004/talk/form/findByName?name=wqb', {'name':'wqb'}, {
+              headers: {
+                'content-type': 'application/json'
+                ,
+                'Access-Control-Allow-Origin': '127.0.0.1:8080'
+                // 'Access-Control-Allow-Origin': '*'
+                // ,"token": '14a1347f412b39f' // token换成从缓存获取  "Access-Control-Allow-Origin"]="http://127.0.0.1:8080"
+              }})
+            .then(res=>{
+              console.log(res)
+              if(res.data.status === 200){
+                localStorage.setItem('username', res.data.username)
+                this.$message({message: res.data.message, type:'success'})
+                this.$router.push('/home')
+              }
+            }).catch(error=>{
+              console.log(error)
+            })
           } else {
             console.log('error submit!!');
             return false;
