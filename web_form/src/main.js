@@ -10,13 +10,13 @@ import '@/plugins/element.js'            // 按需引用（具体引用，封装
 // import {Message} from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'font-awesome/css/font-awesome.min.css'
-import FastClick from 'fastclick'
+// import FastClick from 'fastclick'
 // Vue.use(elementUI)
 Vue.prototype.axios = axios
 Vue.prototype.service = service
 Vue.config.productionTip = false
 
-FastClick.attach(document.body);  // 解决ElementUI el-select在移动端需要点击两次才能弹出下拉与选中
+// FastClick.attach(document.body);  // 解决ElementUI el-select在移动端需要点击两次才能弹出下拉与选中
 
 /* eslint-disable no-new */
 new Vue({
