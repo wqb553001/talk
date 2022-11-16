@@ -1,8 +1,13 @@
 <template>
-  <div id="app">
-<!--    <img src="./assets/logo.png">-->
-    <router-view/>
-  </div>
+<!--  <div id="app">-->
+<!--&lt;!&ndash;    <img src="./assets/logo.png">&ndash;&gt;-->
+<!--    <router-view/>-->
+<!--  </div>-->
+<!--  <v-btn color="info">Info</v-btn>-->
+
+  <v-app id='app'>
+    <router-view></router-view>
+  </v-app>　
 </template>
 
 <script>

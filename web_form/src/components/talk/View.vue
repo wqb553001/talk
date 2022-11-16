@@ -17,33 +17,37 @@
       src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
     ></v-img>
 
-<!--    <v-card-title>期待已久</v-card-title>-->
+    <v-card-title>期待已久</v-card-title>
 
     <v-card-text>
-      <template>
-        <form>
-          <v-text-field
-            v-model="defaultForm.theme"
-            :counter="10"
-            label="话题："
-            required
-          ></v-text-field>
+      <v-row
+        align="center"
+        class="mx-0"
+      >
+        <v-rating
+          :value="4.5"
+          color="amber"
+          dense
+          half-increments
+          readonly
+          size="14"
+        ></v-rating>
 
-          <v-btn
-            class="mr-4"
-            @click="submit"
-          >
-            辩则明
-          </v-btn>
-        </form>
-      </template>
+        <div class="grey--text ms-4">
+          迫不及待
+        </div>
+      </v-row>
+
+      <div class="my-4 text-subtitle-1">
+        辩则明
+      </div>
 
       <div>你关心我，我关心你关心的~</div>
     </v-card-text>
 
     <v-divider class="mx-4"></v-divider>
 
-    <v-card-title>最火辩论场</v-card-title>
+    <v-card-title>Tonight's availability</v-card-title>
 
     <v-card-text>
       <v-chip-group
@@ -51,10 +55,13 @@
         active-class="deep-purple accent-4 white--text"
         column
       >
-        <v-chip>theme1：金钱是万恶之源</v-chip>
-        <v-chip>theme2：是否该废除死刑</v-chip>
-        <v-chip>theme3：环境与科技：先发展，还是先治理</v-chip>
-        <v-chip>theme4：资本主义与社会主义</v-chip>
+        <v-chip>5:30PM</v-chip>
+
+        <v-chip>7:30PM</v-chip>
+
+        <v-chip>8:00PM</v-chip>
+
+        <v-chip>9:00PM</v-chip>
       </v-chip-group>
     </v-card-text>
 
@@ -62,9 +69,9 @@
       <v-btn
         color="deep-purple lighten-2"
         text
-        @click="goLogin"
+        @click="reserve"
       >
-        登录
+        Reserve
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -109,72 +116,24 @@
       margin: 5% auto;
     }
   }
-  .v-textarea textarea{
-    line-height: .3rem;
-  }
 </style>
 
 <!--<script type="text/javascript" src="../components/login.js"></script>-->
 
 <script text='' type="text/javascript">
   export default {
-    // data: () => ({
-    //   loading: false,
-    //   selection: 1,
-    // }),
-
-    data () {
-      const defaultForm = Object.freeze({
-        theme:'',
-        first: '',
-        last: '',
-        bio: '',
-        favoriteAnimal: '',
-        age: null,
-        terms: false,
-      })
-      return {
-        form: Object.assign({}, defaultForm),
-        rules: {
-          age: [
-            val => val < 10 || `I don't believe you!`,
-          ],
-          animal: [val => (val || '').length > 0 || 'This field is required'],
-          name: [val => (val || '').length > 0 || 'This field is required'],
-        },
-        animals: ['Dog', 'Cat', 'Rabbit', 'Turtle', 'Snake'],
-        conditions: false,
-        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.',
-        snackbar: false,
-        terms: false,
-        defaultForm,
-
-        loading: false,
-        selection: 1,
-      }
-    },
+    data: () => ({
+      loading: false,
+      selection: 1,
+    }),
 
     methods: {
-      goLogin () {
+      reserve () {
         this.loading = true
 
         setTimeout(() => (this.loading = false), 2000)
-        this.$router.push('/login')
-      },
-      submit () {
-        this.$router.push('/login')
       },
     },
-
-    // computed: {
-    //   themeErrors () {
-    //     const errors = []
-    //     if (!this.$v.defaultForm.theme.$dirty) return errors
-    //     !this.$v.defaultForm.theme.maxLength && errors.push('Theme must be at most 3 characters long')
-    //     !this.$v.defaultForm.theme.required && errors.push('Theme is required.')
-    //     return errors
-    //   },
-    // },
   }
 </script>
 

@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { getToken } from '@/utils/tokenUtil.js'
-import { Message } from 'element-ui'
 
 const service = axios.create({
     baseURL: '/api/talk/form', // baseURL会自动加在请求地址上
@@ -27,7 +26,8 @@ service.interceptors.response.use((response) => {
     // 对响应数据做些什么
     let { status, message } = response.data
     if(status !== 200) {
-        Message({message: message || 'error', type: 'warning'})
+        // Message({message: message || 'error', type: 'warning'})
+      console.error(message)
     }
     return response
 }, (error) => {

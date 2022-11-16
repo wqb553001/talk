@@ -5,13 +5,14 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 import service from '../src/interceptor/service'
-import '@/plugins/element.js'            // 按需引用（具体引用，封装到了 element.js 中）
-// import elementUI from 'element-ui'    // 全量引用
-// import {Message} from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
 import 'font-awesome/css/font-awesome.min.css'
 // import FastClick from 'fastclick'
-// Vue.use(elementUI)
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+import vuetify from "./plugins/vuetify";
+
+Vue.use(Vuetify)
+
 Vue.prototype.axios = axios
 Vue.prototype.service = service
 Vue.config.productionTip = false
@@ -19,9 +20,18 @@ Vue.config.productionTip = false
 // FastClick.attach(document.body);  // 解决ElementUI el-select在移动端需要点击两次才能弹出下拉与选中
 
 /* eslint-disable no-new */
+// new Vue({
+//   el: '#app',
+//   router,
+//   vuetify:new vuetify(),
+//   components: { App },
+//   template: '<App/>'
+// })
+
+Vue.config.productionTip = false
+
 new Vue({
-  el: '#app',
   router,
-  components: { App },
-  template: '<App/>'
-})
+  vuetify,
+  render: h => h(App)
+}).$mount('#app')
